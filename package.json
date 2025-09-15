@@ -8,9 +8,10 @@
     "hanzo": "./bin/hanzo.js"
   },
   "scripts": {
-    "build": "npm run build:rust && npm run build:ts",
+    "build": "npm run build:rust && npm run build:ts && npm run build:cli",
     "build:rust": "cargo build --release --manifest-path=src/rs/Cargo.toml 2>/dev/null || echo 'Rust build failed, using JS fallback'",
     "build:ts": "tsc",
+    "build:cli": "mkdir -p dist && cp bin/hanzo.js dist/cli.js 2>/dev/null || echo 'CLI copy skipped'",
     "dev": "tsc --watch",
     "test": "jest",
     "lint": "eslint src/js --ext .ts,.tsx",
