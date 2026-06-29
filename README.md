@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="sdk" width="880"></p>
+
 # Hanzo Unified SDK
 
 Unified multi-language SDK for Hanzo AI infrastructure, combining Python, JavaScript/TypeScript, Rust, and Go implementations.
