@@ -1,0 +1,4 @@
+additionalProperties:
+  npmName: "@hanzo/sdk"
+  supportsES6: true
+  useSingleRequestParameter: true
