@@ -37,7 +37,11 @@ jobs:
       - name: Fetch unified spec (private openapi)
         env:
           GH_TOKEN: ${{ secrets.GH_PAT || secrets.UNIVERSE_DISPATCH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: make spec
+        run: |
+          mkdir -p spec
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw" \
+            "https://api.github.com/repos/hanzoai/openapi/contents/hanzo.yaml?ref=main" -o spec/hanzo.yaml
+          echo "fetched $(grep -c '^  /' spec/hanzo.yaml) paths"
       - name: Generate ${{ matrix.lang }}
         run: LANGS="${{ matrix.lang }}" ./scripts/generate.sh
       - uses: actions/upload-artifact@v4
