@@ -22,9 +22,6 @@
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "src/py",
-    "src/rs",
-    "src/go"
+    "dist"
   ]
 }
