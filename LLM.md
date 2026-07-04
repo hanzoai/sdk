@@ -1,19 +1,20 @@
-# sdk
+# @hanzo/cli
 
-**Org:** hanzoai  ·  **Ecosystem:** hanzo  ·  **Path:** `/Users/a/work/hanzo/hanzoai/sdk`
-**Origin:** https://github.com/hanzoai/sdk.git
+The unified Hanzo **CLI** (`hanzo node|agent|mcp|net|dev …`). Built from
+`src/js` only (`dist/`). This is the CLI, a separate concern from the client
+SDKs.
 
-## Discovery
+## This repo is NOT the SDK generator (decided 2026-07)
 
-This file (`CLAUDE.md`) is the canonical agent-facing readme; `LLM.md` is a symlink to it. Update either name and both stay in sync.
+The client SDKs are one repo per language, each generated from the ONE spec
+`hanzoai/openapi/hanzo.yaml`:
 
-## Where to look first
+- Python/Go/JS → `hanzoai/{python,go,js}-sdk` via Stainless project `hanzo-ai`.
+- Rust → `hanzoai/rust-sdk` (hand-written).
+- C++ / Dart → `hanzoai/{cpp,dart}-sdk` via openapi-generator on ARC.
 
-- `README.md` — human-facing overview (if present)
-- `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod` — language & deps
-- `.github/workflows/` — CI surface
-- `docs/` — extended docs (if present)
-
-## Sibling repos
-
-See the org-level `LLM.md` at `/Users/a/work/hanzo/hanzoai/LLM.md` for the full inventory of sibling repos and inter-repo dependencies.
+The earlier `gen/` (openapi-generator over 10 langs, "replaces Stainless") and
+the `src/{py,go,rs}` client copies were a SECOND way that duplicated those
+repos. Retired — removed. There is one interface (`hanzo.yaml`) and one repo per
+language; generator backend is an orthogonal per-language choice. This repo owns
+only the CLI (`src/js`).
