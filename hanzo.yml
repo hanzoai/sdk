@@ -1,0 +1,18 @@
+# Canonical CI/CD config for hanzoai/sdk (@hanzo/cli) — read by the hanzoai/ci
+# reusable (.hanzo/workflows/cicd.yml) and by platform.hanzo.ai.
+#
+# An npm package: it ships from a tag, builds no image, so no `images:` and no
+# `deploy:`.
+#
+# `npm run build:ts` (tsc), not `npm run build`. The composite `build` script
+# begins with build:rust, which ends in
+#   `|| echo 'Rust build failed, using JS fallback'`
+# — a swallow that cannot fail, so wiring the gate to it would report a broken
+# TypeScript compile as success in exactly half the cases. build:ts is the part
+# that ships (dist/ is what npm publishes) and the part that can go red.
+
+test:
+  - name: build
+    run: npm ci && npm run build:ts
+  - name: test
+    run: npm test
