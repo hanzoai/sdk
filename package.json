@@ -6,19 +6,18 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "hanzo": "./bin/hanzo.cjs"
+    "hanzo": "./bin/hanzo.js"
   },
   "scripts": {
-    "build": "npm run build:rust && npm run build:ts && npm run build:cli",
+    "build": "npm run build:rust && npm run build:ts",
     "build:rust": "cargo build --release --manifest-path=src/rs/Cargo.toml 2>/dev/null || echo 'Rust build failed, using JS fallback'",
     "build:ts": "tsc",
-    "build:cli": "mkdir -p dist && cp bin/hanzo.js dist/cli.js 2>/dev/null || echo 'CLI copy skipped'",
     "dev": "tsc --watch",
     "test": "jest",
     "lint": "eslint src/js --ext .ts,.tsx",
     "format": "prettier --write 'src/js/**/*.{ts,tsx,js,jsx}'",
     "prepack": "npm run build",
-    "postinstall": "node scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.cjs"
   },
   "files": [
     "dist",
