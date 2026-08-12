@@ -7,7 +7,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import * as fs from 'fs';
 import * as path from 'path';
-import { getRustBindings, useRust } from '../index';
+import { getRustBindings, useRust } from '../index.js';
 
 export function agentCommands(program: Command) {
   const agent = program
