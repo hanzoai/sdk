@@ -1,16 +1,10 @@
-"use strict";
 /**
  * MCP (Model Context Protocol) commands
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.mcpCommands = mcpCommands;
-const chalk_1 = __importDefault(require("chalk"));
-const ora_1 = __importDefault(require("ora"));
-const index_1 = require("../index");
-function mcpCommands(program) {
+import chalk from 'chalk';
+import ora from 'ora';
+import { getRustBindings, useRust } from '../index.js';
+export function mcpCommands(program) {
     const mcp = program
         .command('mcp')
         .description('Model Context Protocol tools');
@@ -20,20 +14,20 @@ function mcpCommands(program) {
         .option('-p, --port <port>', 'Port to serve on', '3000')
         .option('-t, --transport <type>', 'Transport type', 'stdio')
         .action(async (options) => {
-        const spinner = (0, ora_1.default)('Starting MCP server...').start();
+        const spinner = ora('Starting MCP server...').start();
         try {
-            if ((0, index_1.useRust)()) {
-                const rust = (0, index_1.getRustBindings)();
+            if (useRust()) {
+                const rust = getRustBindings();
                 await rust.startMCPServer(options);
             }
             else {
                 // JS implementation
                 console.log(`MCP server running on port ${options.port} with ${options.transport} transport`);
             }
-            spinner.succeed(chalk_1.default.green(`MCP server running on port ${options.port}`));
+            spinner.succeed(chalk.green(`MCP server running on port ${options.port}`));
         }
         catch (error) {
-            spinner.fail(chalk_1.default.red('Failed to start MCP server'));
+            spinner.fail(chalk.red('Failed to start MCP server'));
             console.error(error);
             process.exit(1);
         }
@@ -60,7 +54,7 @@ function mcpCommands(program) {
         .description('Execute an MCP tool')
         .option('-p, --params <json>', 'JSON parameters')
         .action(async (tool, action, options) => {
-        const spinner = (0, ora_1.default)(`Running MCP tool '${tool}'...`).start();
+        const spinner = ora(`Running MCP tool '${tool}'...`).start();
         try {
             if (options.params) {
                 try {
@@ -68,22 +62,22 @@ function mcpCommands(program) {
                     console.log('Parameters:', params);
                 }
                 catch (e) {
-                    spinner.fail(chalk_1.default.red('Invalid JSON parameters'));
+                    spinner.fail(chalk.red('Invalid JSON parameters'));
                     process.exit(1);
                 }
             }
-            if ((0, index_1.useRust)()) {
-                const rust = (0, index_1.getRustBindings)();
+            if (useRust()) {
+                const rust = getRustBindings();
                 await rust.runMCPTool(tool, action, options.params);
             }
             else {
                 // JS implementation
                 await new Promise(resolve => setTimeout(resolve, 500));
             }
-            spinner.succeed(chalk_1.default.green(`Tool '${tool}' executed successfully`));
+            spinner.succeed(chalk.green(`Tool '${tool}' executed successfully`));
         }
         catch (error) {
-            spinner.fail(chalk_1.default.red('Failed to run MCP tool'));
+            spinner.fail(chalk.red('Failed to run MCP tool'));
             console.error(error);
             process.exit(1);
         }

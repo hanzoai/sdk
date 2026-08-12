@@ -5,7 +5,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
-import { getRustBindings, useRust } from '../index';
+import { getRustBindings, useRust } from '../index.js';
 
 export function mcpCommands(program: Command) {
   const mcp = program

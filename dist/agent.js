@@ -1,10 +1,7 @@
-"use strict";
 /**
  * Agent framework
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Agent = void 0;
-class Agent {
+export class Agent {
     constructor(options) {
         this.name = options.name;
         this.model = options.model || 'gpt-4';
@@ -27,5 +24,4 @@ class Agent {
         };
     }
 }
-exports.Agent = Agent;
 //# sourceMappingURL=agent.js.map

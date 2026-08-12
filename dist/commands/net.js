@@ -1,15 +1,9 @@
-"use strict";
 /**
  * Network management commands
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.netCommands = netCommands;
-const chalk_1 = __importDefault(require("chalk"));
-const index_1 = require("../index");
-function netCommands(program) {
+import chalk from 'chalk';
+import { getRustBindings, useRust } from '../index.js';
+export function netCommands(program) {
     const net = program
         .command('net')
         .description('Network operations');
@@ -17,8 +11,8 @@ function netCommands(program) {
         .command('status')
         .description('Check network status')
         .action(async () => {
-        if ((0, index_1.useRust)()) {
-            const rust = (0, index_1.getRustBindings)();
+        if (useRust()) {
+            const rust = getRustBindings();
             const status = await rust.getNetworkStatus();
             console.log(status);
         }
@@ -34,8 +28,8 @@ function netCommands(program) {
         .command('peers')
         .description('List connected peers')
         .action(async () => {
-        if ((0, index_1.useRust)()) {
-            const rust = (0, index_1.getRustBindings)();
+        if (useRust()) {
+            const rust = getRustBindings();
             const peers = await rust.listPeers();
             console.log(peers);
         }
@@ -51,22 +45,22 @@ function netCommands(program) {
         .description('Connect to a peer')
         .action(async (address) => {
         console.log(`Connecting to ${address}...`);
-        if ((0, index_1.useRust)()) {
-            const rust = (0, index_1.getRustBindings)();
+        if (useRust()) {
+            const rust = getRustBindings();
             await rust.connectToPeer(address);
         }
-        console.log(chalk_1.default.green(`✅ Connected to ${address}`));
+        console.log(chalk.green(`✅ Connected to ${address}`));
     });
     net
         .command('disconnect <peerId>')
         .description('Disconnect from a peer')
         .action(async (peerId) => {
         console.log(`Disconnecting from ${peerId}...`);
-        if ((0, index_1.useRust)()) {
-            const rust = (0, index_1.getRustBindings)();
+        if (useRust()) {
+            const rust = getRustBindings();
             await rust.disconnectFromPeer(peerId);
         }
-        console.log(chalk_1.default.green(`✅ Disconnected from ${peerId}`));
+        console.log(chalk.green(`✅ Disconnected from ${peerId}`));
     });
 }
 //# sourceMappingURL=net.js.map

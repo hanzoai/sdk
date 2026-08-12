@@ -4,7 +4,7 @@
 
 import { Command } from 'commander';
 import chalk from 'chalk';
-import { getRustBindings, useRust } from '../index';
+import { getRustBindings, useRust } from '../index.js';
 
 export function netCommands(program: Command) {
   const net = program

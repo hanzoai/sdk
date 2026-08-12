@@ -6,7 +6,7 @@ import { Command } from 'commander';
 import { spawn, execSync } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
-import { getRustBindings, useRust } from '../index';
+import { getRustBindings, useRust } from '../index.js';
 
 export function nodeCommands(program: Command) {
   const node = program

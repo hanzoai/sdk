@@ -1,10 +1,7 @@
-"use strict";
 /**
  * Node management
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Node = void 0;
-class Node {
+export class Node {
     constructor(port = 4000) {
         this.port = port;
         this.running = false;
@@ -33,5 +30,4 @@ class Node {
         return this.models;
     }
 }
-exports.Node = Node;
 //# sourceMappingURL=node.js.map
