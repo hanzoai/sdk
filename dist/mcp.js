@@ -1,10 +1,7 @@
-"use strict";
 /**
  * MCP (Model Context Protocol) server
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MCPServer = void 0;
-class MCPServer {
+export class MCPServer {
     constructor(transport = 'stdio') {
         this.transport = transport;
         this.tools = new Map();
@@ -38,5 +35,4 @@ class MCPServer {
         return Array.from(this.tools.keys());
     }
 }
-exports.MCPServer = MCPServer;
 //# sourceMappingURL=mcp.js.map

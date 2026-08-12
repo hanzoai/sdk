@@ -5,13 +5,13 @@
 
 import { Command } from 'commander';
 import chalk from 'chalk';
-import { nodeCommands } from './commands/node';
-import { agentCommands } from './commands/agent';
-import { mcpCommands } from './commands/mcp';
-import { netCommands } from './commands/net';
-import { devCommands } from './commands/dev';
-import { authCommands } from './commands/auth';
-import { configCommands } from './commands/config';
+import { nodeCommands } from './commands/node.js';
+import { agentCommands } from './commands/agent.js';
+import { mcpCommands } from './commands/mcp.js';
+import { netCommands } from './commands/net.js';
+import { devCommands } from './commands/dev.js';
+import { authCommands } from './commands/auth.js';
+import { configCommands } from './commands/config.js';
 
 const program = new Command();
 

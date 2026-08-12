@@ -1,16 +1,10 @@
-"use strict";
 /**
  * Hanzo API client
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.HanzoClient = void 0;
-const axios_1 = __importDefault(require("axios"));
-class HanzoClient {
+import axios from 'axios';
+export class HanzoClient {
     constructor(apiKey, baseURL = 'https://api.hanzo.ai') {
-        this.client = axios_1.default.create({
+        this.client = axios.create({
             baseURL,
             headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : {}
         });
@@ -29,5 +23,4 @@ class HanzoClient {
         return response.data.data.map((m) => m.id);
     }
 }
-exports.HanzoClient = HanzoClient;
 //# sourceMappingURL=client.js.map
