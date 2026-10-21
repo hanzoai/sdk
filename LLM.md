@@ -45,6 +45,7 @@ manifest before changing a row:
 - TypeScript: `js-sdk/package.json` `name`
 - Go: `go-sdk/go.mod` `module`
 - Rust: `rust-sdk/crates/hanzo-client/Cargo.toml` `name`
+- PHP: `php-sdk/composer.json` `name` (published on Packagist)
 - Java: `java-sdk/hanzo-java-cloud/build.gradle` `group` + module name
 - Kotlin: `kotlin-sdk/hanzo-kotlin-cloud/build.gradle.kts` `group` + module name
 
