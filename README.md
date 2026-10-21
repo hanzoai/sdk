@@ -11,6 +11,7 @@ package; this is where you find the right one. Nothing ships from here.
 | TypeScript | `hanzoai` | `npm install hanzoai` | [hanzoai/js-sdk](https://github.com/hanzoai/js-sdk) |
 | Go | `github.com/hanzoai/go-sdk` | `go get github.com/hanzoai/go-sdk` | [hanzo-go/sdk](https://github.com/hanzo-go/sdk) |
 | Rust | `hanzo-client` | `cargo add hanzo-client` | `hanzo-rs/sdk` |
+| PHP | `hanzoai/hanzoai` | `composer require hanzoai/hanzoai` | [hanzoai/php-sdk](https://github.com/hanzoai/php-sdk) |
 | Java | `ai.hanzo:hanzo-java-cloud` | Gradle or Maven | [hanzoai/java-sdk](https://github.com/hanzoai/java-sdk) |
 | Kotlin | `ai.hanzo:hanzo-kotlin-cloud` | Gradle or Maven | [hanzo-kotlin/sdk](https://github.com/hanzo-kotlin/sdk) |
 | Swift | `Hanzo` | SwiftPM, from tag `v8.0.0` | [hanzo-swift/sdk](https://github.com/hanzo-swift/sdk) |
