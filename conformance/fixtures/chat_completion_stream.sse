@@ -1,0 +1,12 @@
+data: {"id":"chatcmpl-stream-01","object":"chat.completion.chunk","created":1715000000,"model":"zen5","choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-stream-01","object":"chat.completion.chunk","created":1715000000,"model":"zen5","choices":[{"index":0,"delta":{"content":"Server"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-stream-01","object":"chat.completion.chunk","created":1715000000,"model":"zen5","choices":[{"index":0,"delta":{"content":"-Sent"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-stream-01","object":"chat.completion.chunk","created":1715000000,"model":"zen5","choices":[{"index":0,"delta":{"content":" Events"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-stream-01","object":"chat.completion.chunk","created":1715000000,"model":"zen5","choices":[{"index":0,"delta":{"content":" rocks."},"finish_reason":"stop"}]}
+
+data: [DONE]
+

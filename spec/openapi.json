@@ -1,0 +1,471 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Hanzo AI Core & Governance API",
+    "version": "1.0.0",
+    "description": "The unified OpenAPI specification for Hanzo AI frontier models, inference, and Kai agent governance.",
+    "contact": {
+      "name": "Hanzo AI Support",
+      "url": "https://hanzo.ai",
+      "email": "support@hanzo.ai"
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.hanzo.ai/v1",
+      "description": "Production Gateway"
+    },
+    {
+      "url": "http://127.0.0.1:8080/v1",
+      "description": "Local Conformance Mock Server"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/models": {
+      "get": {
+        "summary": "List Models",
+        "operationId": "getModels",
+        "description": "Lists the currently available models in the Hanzo catalog, with pricing and capability metadata.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successful model catalog listing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelList"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/{model}": {
+      "get": {
+        "summary": "Retrieve Model",
+        "operationId": "getModel",
+        "description": "Retrieves details about a specific model instance.",
+        "parameters": [
+          {
+            "name": "model",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the model to retrieve (e.g. zen5, zen5-coder, enso).",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Model details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/completions": {
+      "post": {
+        "summary": "Create Chat Completion",
+        "operationId": "createChatCompletion",
+        "description": "Generates a model response for a sequence of chat messages. Supports both unary JSON replies and SSE streaming.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatCompletionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful chat completion or SSE stream",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatCompletionResponse"
+                }
+              },
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Server-Sent Events stream delivering ChatCompletionChunk payloads"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized / Missing API Key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded or quota exhausted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/embeddings": {
+      "post": {
+        "summary": "Create Embeddings",
+        "operationId": "createEmbedding",
+        "description": "Generates dense vector embeddings representing the input text.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbeddingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful embeddings response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddingResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/decisions": {
+      "post": {
+        "summary": "Evaluate Agent Decision (Kai)",
+        "operationId": "evaluateDecision",
+        "description": "Evaluates proposed agent actions against explicit behavioral policies and constitutional constraints using the Kai Decision Engine.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KaiDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Policy evaluation verdict and audit metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KaiDecisionResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT / sk-*"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Hanzo-Key"
+      }
+    },
+    "schemas": {
+      "Model": {
+        "type": "object",
+        "required": ["id", "object", "created", "owned_by"],
+        "properties": {
+          "id": { "type": "string", "example": "zen5" },
+          "object": { "type": "string", "example": "model" },
+          "created": { "type": "integer", "example": 1715000000 },
+          "owned_by": { "type": "string", "example": "hanzo" },
+          "pricing": {
+            "type": "object",
+            "properties": {
+              "input": { "type": "number", "example": 0.15 },
+              "output": { "type": "number", "example": 0.60 }
+            }
+          }
+        }
+      },
+      "ModelList": {
+        "type": "object",
+        "required": ["object", "data"],
+        "properties": {
+          "object": { "type": "string", "example": "list" },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Model" }
+          }
+        }
+      },
+      "ChatMessage": {
+        "type": "object",
+        "required": ["role"],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["system", "user", "assistant", "tool"]
+          },
+          "content": {
+            "type": ["string", "null"],
+            "example": "Hello, how can I assist you?"
+          },
+          "name": { "type": "string" },
+          "tool_calls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "type": { "type": "string", "enum": ["function"] },
+                "function": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "arguments": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ChatCompletionRequest": {
+        "type": "object",
+        "required": ["model", "messages"],
+        "properties": {
+          "model": { "type": "string", "example": "zen5" },
+          "messages": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChatMessage" }
+          },
+          "temperature": { "type": "number", "minimum": 0, "maximum": 2, "default": 0.7 },
+          "top_p": { "type": "number", "minimum": 0, "maximum": 1, "default": 1.0 },
+          "stream": { "type": "boolean", "default": false },
+          "max_tokens": { "type": "integer" },
+          "tools": { "type": "array", "items": { "type": "object" } },
+          "tool_choice": { "type": ["string", "object"] }
+        }
+      },
+      "ChatCompletionChoice": {
+        "type": "object",
+        "required": ["index", "message", "finish_reason"],
+        "properties": {
+          "index": { "type": "integer", "example": 0 },
+          "message": { "$ref": "#/components/schemas/ChatMessage" },
+          "finish_reason": {
+            "type": ["string", "null"],
+            "enum": ["stop", "length", "tool_calls", "content_filter", null],
+            "example": "stop"
+          }
+        }
+      },
+      "Usage": {
+        "type": "object",
+        "required": ["prompt_tokens", "completion_tokens", "total_tokens"],
+        "properties": {
+          "prompt_tokens": { "type": "integer", "example": 12 },
+          "completion_tokens": { "type": "integer", "example": 8 },
+          "total_tokens": { "type": "integer", "example": 20 }
+        }
+      },
+      "ChatCompletionResponse": {
+        "type": "object",
+        "required": ["id", "object", "created", "model", "choices", "usage"],
+        "properties": {
+          "id": { "type": "string", "example": "chatcmpl-7f8e9a1" },
+          "object": { "type": "string", "example": "chat.completion" },
+          "created": { "type": "integer", "example": 1715000000 },
+          "model": { "type": "string", "example": "zen5" },
+          "choices": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChatCompletionChoice" }
+          },
+          "usage": { "$ref": "#/components/schemas/Usage" }
+        }
+      },
+      "EmbeddingRequest": {
+        "type": "object",
+        "required": ["model", "input"],
+        "properties": {
+          "model": { "type": "string", "example": "zen-embed" },
+          "input": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          },
+          "dimensions": { "type": "integer" }
+        }
+      },
+      "EmbeddingResponse": {
+        "type": "object",
+        "required": ["object", "data", "model", "usage"],
+        "properties": {
+          "object": { "type": "string", "example": "list" },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["object", "index", "embedding"],
+              "properties": {
+                "object": { "type": "string", "example": "embedding" },
+                "index": { "type": "integer", "example": 0 },
+                "embedding": {
+                  "type": "array",
+                  "items": { "type": "number" }
+                }
+              }
+            }
+          },
+          "model": { "type": "string", "example": "zen-embed" },
+          "usage": {
+            "type": "object",
+            "required": ["prompt_tokens", "total_tokens"],
+            "properties": {
+              "prompt_tokens": { "type": "integer", "example": 6 },
+              "total_tokens": { "type": "integer", "example": 6 }
+            }
+          }
+        }
+      },
+      "KaiDecisionRequest": {
+        "type": "object",
+        "required": ["agent_id", "policy_id", "action"],
+        "properties": {
+          "agent_id": { "type": "string", "example": "agent-support-1" },
+          "policy_id": { "type": "string", "example": "pol-security-baseline" },
+          "action": {
+            "type": "object",
+            "required": ["type", "payload"],
+            "properties": {
+              "type": { "type": "string", "example": "execute_tool" },
+              "payload": { "type": "object" }
+            }
+          },
+          "context": { "type": "object" }
+        }
+      },
+      "KaiDecisionResponse": {
+        "type": "object",
+        "required": ["decision_id", "verdict", "confidence", "policy_id", "evaluated_at"],
+        "properties": {
+          "decision_id": { "type": "string", "example": "dec-99b82c14" },
+          "verdict": {
+            "type": "string",
+            "enum": ["ALLOW", "DENY", "MODIFY"],
+            "example": "ALLOW"
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1, "example": 0.98 },
+          "reasoning": { "type": "string", "example": "Action conforms to explicit security guardrails." },
+          "policy_id": { "type": "string", "example": "pol-security-baseline" },
+          "evaluated_at": { "type": "integer", "example": 1715000000 }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["message", "type"],
+            "properties": {
+              "message": { "type": "string", "example": "Invalid API Key provided." },
+              "type": { "type": "string", "example": "authentication_error" },
+              "param": { "type": ["string", "null"] },
+              "code": { "type": ["string", "null"], "example": "invalid_api_key" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

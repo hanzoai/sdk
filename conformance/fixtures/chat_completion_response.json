@@ -1,0 +1,21 @@
+{
+  "id": "chatcmpl-9b8e1f02c4",
+  "object": "chat.completion",
+  "created": 1715000000,
+  "model": "zen5",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Server-Sent Events (SSE) allows servers to push unidirectional real-time event streams to clients over a single HTTP connection."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 24,
+    "completion_tokens": 22,
+    "total_tokens": 46
+  }
+}

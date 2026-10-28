@@ -1,0 +1,12 @@
+{
+  "decision_id": "dec-kai-9481ad3f",
+  "verdict": "ALLOW",
+  "confidence": 0.994,
+  "reasoning": "Transaction amount of $25.00 is strictly within daily ceiling ($500.00) and matches authorized agent credit refill policy.",
+  "policy_id": "pol-financial-safety-v2",
+  "constraints": {
+    "require_2fa": false,
+    "audit_log": true
+  },
+  "evaluated_at": 1715000000
+}

@@ -1,0 +1,19 @@
+{
+  "agent_id": "kai-autonomous-agent-01",
+  "policy_id": "pol-financial-safety-v2",
+  "action": {
+    "type": "execute_transaction",
+    "payload": {
+      "recipient": "0x71C...3a",
+      "amount": 25.00,
+      "currency": "USD",
+      "purpose": "API credits refill"
+    }
+  },
+  "context": {
+    "user_authenticated": true,
+    "user_tier": "pro",
+    "daily_spent": 120.00,
+    "daily_limit": 500.00
+  }
+}

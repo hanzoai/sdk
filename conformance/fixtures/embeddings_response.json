@@ -1,0 +1,24 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "embedding",
+      "index": 0,
+      "embedding": [
+        0.0124,
+        -0.0381,
+        0.0092,
+        0.0415,
+        -0.0078,
+        0.0211,
+        -0.0153,
+        0.0039
+      ]
+    }
+  ],
+  "model": "zen-embed",
+  "usage": {
+    "prompt_tokens": 10,
+    "total_tokens": 10
+  }
+}

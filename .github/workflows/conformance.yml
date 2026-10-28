@@ -1,0 +1,30 @@
+name: Conformance & Specification CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-spec-and-fixtures:
+    name: Wire Conformance & Spec Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Conformance Harness & Gateway Mock Verification
+        run: |
+          python3 conformance/runner.py --validate-all
+
+      - name: Verify Quickstart Scripts Syntax
+        run: |
+          python3 -m py_compile examples/python/quickstart.py
+          bash -n examples/curl/quickstart.sh

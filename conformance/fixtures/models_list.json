@@ -1,0 +1,45 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "zen5",
+      "object": "model",
+      "created": 1715000000,
+      "owned_by": "hanzo",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.60
+      }
+    },
+    {
+      "id": "zen5-coder",
+      "object": "model",
+      "created": 1715000000,
+      "owned_by": "hanzo",
+      "pricing": {
+        "input": 0.20,
+        "output": 0.80
+      }
+    },
+    {
+      "id": "enso",
+      "object": "model",
+      "created": 1715000000,
+      "owned_by": "hanzo",
+      "pricing": {
+        "input": 0.05,
+        "output": 0.20
+      }
+    },
+    {
+      "id": "zen-embed",
+      "object": "model",
+      "created": 1715000000,
+      "owned_by": "hanzo",
+      "pricing": {
+        "input": 0.02,
+        "output": 0.0
+      }
+    }
+  ]
+}
