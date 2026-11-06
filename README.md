@@ -32,7 +32,7 @@ Hanzo provides two distinct, complementary tiers across every major programming 
 | **Kotlin** | Cloud & Agents | `ai.hanzo:hanzo-kotlin-cloud` | Gradle / Maven | [hanzo-kotlin/sdk](https://github.com/hanzo-kotlin/sdk) | [Kotlin Docs](https://docs.hanzo.ai/docs/sdks/kotlin) |
 | **Swift** | Cloud & Async/Await | `Hanzo` | SwiftPM (tag `v8.0.0`) | [hanzo-swift/sdk](https://github.com/hanzo-swift/sdk) | [Swift Docs](https://docs.hanzo.ai/docs/sdks/swift) |
 | **C++** | Native Bindings | `hanzo::hanzo` | CMake `FetchContent` | [hanzo-cpp/sdk](https://github.com/hanzo-cpp/sdk) | [C++ Docs](https://docs.hanzo.ai/docs/sdks/cpp) |
-| **C# / .NET** | Cloud API | `Hanzo.AI` | `dotnet add package Hanzo.AI` | [hanzoai/csharp-sdk](https://github.com/hanzoai/csharp-sdk) | [C# Docs](https://docs.hanzo.ai/docs/sdks/csharp) |
+| **C# / .NET** | Cloud (typed client) | `Hanzo` (namespace `Hanzo.AI`) | `dotnet add package Hanzo` | [hanzo-csharp/sdk](https://github.com/hanzo-csharp/sdk) · [hanzoai/csharp-sdk](https://github.com/hanzoai/csharp-sdk) | [C# Docs](https://docs.hanzo.ai/docs/sdks/csharp) |
 | **Web Fetch** | Browser / Edge | `@hanzo/sdk-fetch` | `npm install @hanzo/sdk-fetch` | [hanzo-js/sdk-fetch](https://github.com/hanzo-js/sdk-fetch) | [Fetch Docs](https://docs.hanzo.ai/docs/sdks/fetch) |
 | **Angular** | Frontend Angular | `@hanzo/sdk-angular` | `npm install @hanzo/sdk-angular` | [hanzo-js/sdk-angular](https://github.com/hanzo-js/sdk-angular) | [Angular Docs](https://docs.hanzo.ai/docs/sdks/angular) |
 | **Hanzo CLI** | Terminal & Automation | `hanzo` | `curl -fsSL https://hanzo.sh \| sh` | [hanzoai/cli](https://github.com/hanzoai/cli) | [CLI Docs](https://docs.hanzo.ai/docs/cli) |
