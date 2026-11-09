@@ -59,7 +59,7 @@ Every official Hanzo SDK speaks the same HTTP/REST and SSE wire protocols:
 | `HANZO_API_KEY` | *(Required)* | Secret API key (`sk-...`) or frontend publishable key (`pk-...`). |
 | `HANZO_BASE_URL` | `https://api.hanzo.ai/v1` | Root API gateway endpoint. |
 | `HANZO_ORG_ID` | `None` | Optional tenant / organization identifier (`X-Hanzo-Org` header). |
-| `HANZO_MODEL` | `zen5` | Default frontier model ID. |
+| `HANZO_MODEL` | `zen6` | Default frontier model ID. |
 | `HANZO_TIMEOUT` | `60` | HTTP request timeout in seconds. |
 | `HANZO_MAX_RETRIES`| `3` | Maximum retry attempts for 429/5xx status codes with exponential backoff. |
 
@@ -74,8 +74,8 @@ curl https://api.hanzo.ai/v1/models
 ```
 
 Recommended frontier models:
-- **`zen5`**: Flagship frontier reasoning model.
-- **`zen5-coder`**: Specialized high-efficiency coding and architecture model.
+- **`zen6`**: Latest Zen model, the default open-weights generation family.
+- **`zen6-coder`**: Specialized high-efficiency coding and architecture model.
 - **`enso`**: Lightweight, ultra-low latency model for high-frequency agent actions.
 - **`zen-embed`**: 1536-dimensional dense vector embeddings.
 
@@ -134,7 +134,7 @@ client = Hanzo()
 
 # Chat Completion
 response = client.chat.completions.create(
-    model="zen5",
+    model="zen6",
     messages=[{"role": "user", "content": "Hello Hanzo!"}]
 )
 print(response.choices[0].message.content)
@@ -148,7 +148,7 @@ import { Hanzo } from '@hanzo/ai';
 const client = new Hanzo();
 
 const response = await client.chat.completions.create({
-  model: 'zen5',
+  model: 'zen6',
   messages: [{ role: 'user', content: 'Hello Hanzo!' }],
 });
 console.log(response.choices[0].message.content);
@@ -168,7 +168,7 @@ import (
 func main() {
     client := hanzo.NewClient()
     resp, _ := client.Chat.CreateCompletion(context.Background(), hanzo.ChatCompletionRequest{
-        Model: "zen5",
+        Model: "zen6",
         Messages: []hanzo.ChatMessage{{Role: "user", Content: "Hello from Go!"}},
     })
     fmt.Println(resp.Choices[0].Message.Content)
@@ -185,7 +185,7 @@ use Hanzo\Client;
 
 $client = new Client();
 $reply = $client->chat->completions->create([
-    'model' => 'zen5',
+    'model' => 'zen6',
     'messages' => [['role' => 'user', 'content' => 'Hello from PHP!']]
 ]);
 echo $reply['choices'][0]['message']['content'] . "\n";
@@ -198,7 +198,7 @@ require 'hanzoai'
 
 client = Hanzoai::Client.new
 reply = client.chat.completions.create(
-  model: 'zen5',
+  model: 'zen6',
   messages: [{ role: 'user', content: 'Hello from Ruby!' }]
 )
 puts reply.choices.first.message.content
@@ -212,7 +212,7 @@ use hanzo_client::{Client, ChatMessage, Role};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::from_env();
-    let reply = client.chat().create_completion("zen5", vec![
+    let reply = client.chat().create_completion("zen6", vec![
         ChatMessage { role: Role::User, content: "Hello from Rust!".into() }
     ]).await?;
     println!("{}", reply.choices[0].message.content);
@@ -235,7 +235,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Company & Support
 
-Hanzo AI is co-led by Co-CEOs **Antje Worring** and **Zach Kelling**.
+Hanzo AI is led by CEO **Antje Worring** and CTO **Zach Kelling**.
 
 - **Corporate Address**: 1 Ferry Building, San Francisco, CA 94105
 - **Inquiries & Support**: [dev@hanzo.ai](mailto:dev@hanzo.ai) · [support@hanzo.ai](mailto:support@hanzo.ai)
