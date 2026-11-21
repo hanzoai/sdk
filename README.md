@@ -2,6 +2,8 @@
 
 # Hanzo AI SDKs
 
+[![Open in Hanzo](https://hanzo.app/badges/open-in-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/sdk&ref=main&action=open) [![Edit with Hanzo](https://hanzo.app/badges/edit-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/sdk&ref=main&action=edit)
+
 [![Conformance & Spec CI](https://github.com/hanzoai/sdk/actions/workflows/conformance.yml/badge.svg)](https://github.com/hanzoai/sdk/actions/workflows/conformance.yml)
 [![OpenAPI 3.1](https://img.shields.io/badge/OpenAPI-3.1-blue.svg)](spec/openapi.json)
 [![License](https://img.shields.io/badge/License-Apache--2.0%20%2F%20MIT-green.svg)](LICENSE)
